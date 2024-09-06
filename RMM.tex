@@ -67,7 +67,7 @@ where the weighted geometric mean of each reserve remains constant (i.e. \href{h
 
 \section{Limitations of AMMs}
 \subsection{Impermanent Loss \& Capital Inefficiency}
-Impermanent loss and low capital inefficiency are two limits of AMMs that affect both liquidity providers and traders.
+Impermanent loss (also known as 'negative gamma' in finance) and low capital inefficiency are two limits of AMMs that affect both liquidity providers and traders.
 
 Consider the following example of impermanent loss: After an LP deposits assets into a pool, the price of one of the deposited assets changes significantly compared to the value when initially deposited. As a result, the ratio of assets in the pool will also fluctuate due to arbitrage trading and rebalancing prices that occur with external markets– therefore, in some cases depositing assets could lessen the LP’s positional value, which is the essence of impermanent loss. In other words, this loss is “impermanent” because the loss is recoverable if prices return to its original state when liquidity was initially deposited. On the other hand, the impermanent loss becomes permanent if the LP decides to withdraw their liquidity from the pool at this new price ratio.
 
@@ -98,11 +98,37 @@ Short Calls indicate an open obligation to sell shares. Until the expiration dat
 
 Investors in long call options hope for the underlying stock price to rise above the exercise price, and on the contrary, short call investors want the underlying stock price to stay below the exercise price. 
 
-\subsection{RMMs vs. AMMs}
+% \subsection{RMMs vs. AMMs}
 
 \section{RMM \& CFMM Curves}
+Since the goal of RMMs, as previously discussed, is to generate a trading function that models a specific trading fee payoff, we can represent the equation for an RMM given the CMM function. A CFMM is governed by its trading function \(\psi \) : \(\mathbb{R}^n_+ \to \mathbb{R}\).
 
-\section{Primitive}
+Each reserve \( R_i \in \mathbb{R}^n_+ \) represents the amount of asset \(i\) available in the contract, which allows individuals to trade reserves as long as the following equation is satisfied: 
+\[ \psi(R') \geq \psi(R), 
+    \] with \(R \in \mathbb{R}^n_+\).
+
+    For a non-decreasing, concave function
+    \[V(\alpha c) = \alpha V(c), \alpha\in\mathbb{R}
+        \]
+    
+    \(V\) is a portfolio value function which maps \(V: \mathbb{R}^n_+ \to \mathbb{R}\). We model asset \(c \in \mathbb{R}^n_+\) as a price vector representing \(n\) coins the CFMM trades, with \(c_i\) being the price of coin \(i\) in the external market. 
+
+    The trading value is then defined with the following equation:
+    \[
+        \psi_V\left(R\right) = \inf_{c\geq0}(c^{\intercal}R - V\left(c\right)).\]
+    
+    Given this definition, it is shown that \(\psi_V\left(R\right)\) is defined as the greatest lower bound (infimum) of the expression \(c^{\intercal}R - V\left(c\right) \) over all non-negative vectors \(c\)
+
+    Now, let's prove that \(\psi_V\left(R\right) \geq 0\) if and only if \(c^{\intercal}R \geq V(c) \forall c \in \mathbb{R}^n\), which is desirable since we want that the least surplus across all non-negative vectors \(c\) to be non-negative to ensure reserves \(R\) are always at least sufficient to meet required values \(V(c)\) under all possible weightings \(c\).
+
+    Given \(\psi_V\left(R\right) \geq 0\), this implies the infimum (least upper bound) of all \(c^{\intercal}R - V\left(c\right)\) across all \(c \geq 0\) is non-negative, which implies that for every non-negative \(c\), the individual value \(c^{\intercal}R - V\left(c\right)\) is also non-negative. Therefore, \(c^TR-V(c) \geq 0 \implies c^TR \geq V(c)\). Since the infimum in this set is proven to be non-negative, this implies all values are at least as great.
+
+    To prove the other direction, since for all \(c \geq 0, c^TR \geq V(c)\), each evaluation of \(c^TV(c)\) would yield a non-negative value. By the same logic, the greatest lower bound of all these values would also be non-negative. Therefore, the condition \(\psi_V\left(R\right) \geq 0\) is true if and only if \(R\) belongs to the set of reserves that yields a payoff greater or equal to \(V\).
+
+    % Circling back to the possibility of generating a trading function \(\psi\) to model a given desired payoff function (V)?
+
+
+\section{Case Study: Primitive}
 Primitive's "RMM-01" is an example of a replicating market maker, built on the idea of a covered call.
 
 \begin{figure}[H]
@@ -114,6 +140,11 @@ Primitive's "RMM-01" is an example of a replicating market maker, built on the i
 
 
 \section*{Appendix}
+
+\subsection{Glossary}\label{subsec:glossary}
+Infimum: The infimum, \(\inf\) of a set is defined to be the greatest lower bound of that set. More rigorously, we define \(\alpha\) to be the \(\inf\) of a set \(A\) if \(\forall x \in A, \alpha \leq x.\)
+Furthermore, since \(\alpha\) is the greatest lower bound, if \(\beta \leq x, \forall x \in A\) and \(\beta \leq \alpha\), since \(\alpha\) serves as the greatest lower bound.
+
 \subsection{Impermanent Loss}\label{subsec:impermanent}
 \href{https://dailydefi.org/tools/impermanent-loss-calculator/}{Daily Defi} provides an impermanent loss calculator that can be used to visualize the calculations of impermanent loss using Uniswap's constant product formula.
 In the following diagram, Token A is initially set to \$150 and Token B is set to \$1. In Future Prices, Token A has increased to \$300 while Token B has remained the same. (The calculator automatically sets a total starting value of \$1000 between the two tokens)
@@ -134,6 +165,38 @@ Below, the results account for the total amount of impermanent loss. The value o
 \end{figure}
 
 \subsection{Greeks}\label{subsec:greeks}
+In decentralized finance (DeFi), the concept of Greeks—borrowed from traditional finance (TradFi)—plays a crucial role in analyzing the sensitivity of various derivative instruments and protocols to different market factors. While the Greeks are primarily used in options trading, their interpretation in DeFi can extend to protocols with automated market makers (AMMs) and liquidity provision mechanisms.
 
+\textbf{Delta (\(\Delta\))}: In DeFi, Delta measures the sensitivity of an asset's price to changes in the price of the underlying token. For instance, in an automated market maker (AMM), Delta can represent how the liquidity pool's token ratio shifts in response to price changes of one of the assets in the pool.
+
+\textbf{Gamma (\(\Gamma\))}: Gamma refers to the rate of change of Delta in response to changes in the price of the underlying asset. In DeFi protocols, Gamma may be important for strategies like yield farming or liquidity mining, where changes in the ratio of tokens due to price movements can impact potential returns.
+
+\textbf{Vega (\(V\))}: Vega represents sensitivity to volatility in both TradFi and DeFi. In decentralized options or derivative markets, Vega can quantify how a liquidity provider’s position might gain or lose value based on increased volatility in the price of the underlying assets.
+
+\textbf{Theta (\(\Theta\))}: In DeFi options or time-dependent strategies, Theta measures the sensitivity of the position's value to the passage of time. For example, in protocols that lock liquidity for a set duration, Theta reflects the decay in value as the lock-up period approaches expiration.
+
+\textbf{Rho (\(\rho\))}: Rho measures sensitivity to interest rates. While interest rate sensitivity is more commonly observed in TradFi, DeFi protocols that involve borrowing or lending, such as Aave or Compound, might see Rho influencing the value of liquidity positions due to changes in lending or borrowing rates.
+
+Understanding these Greeks allows DeFi participants to better assess risk and manage strategies in decentralized options markets, liquidity pools, and other financial instruments.
+
+\section*{References}
+\begin{enumerate}
+    \item \href{https://medium.com/numoen/an-introduction-to-replicating-market-makers-de5c44d3c558}{An Introduction to Replicating Market Makers} (Numeon, 2021)
+    \item \href{https://www.thetie.io/insights/research/rmm/}{Replicating Market Makers} (The Tie, 2021)
+    \item \href{https://mirror.xyz/evandekim.eth/aUULTZFwhJ9XsOZ6XIbAYl1iaSncDKpDwKazCemJlI8}{Mirror.xyz: Replicating Market Makers by Evan De Kim} (2021)
+    \item \href{https://chain.link/education-hub/what-is-an-automated-market-maker-amm}{What is an Automated Market Maker (AMM)?} (Chainlink Education Hub, 2021)
+    \item \href{https://ui.adsabs.harvard.edu/abs/2021arXiv210314769A/abstract}{Automated Market Makers and the Universal Law of Demand} (Harvard ADS, 2021)
+    \item \href{https://opynopyn.notion.site/Market-Makers-4ca991796d8b452fa1358344f941f624}{Market Makers} (Opyn Notion, 2021)
+    \item \href{https://library.primitive.xyz/faq/usage/rmm}{Primitive.xyz RMM FAQ} (2021)
+    \item \href{https://primitive.mirror.xyz/Audtl29HY_rnhN4E2LwnP7-zjDcDGAyXZ4h3QpDeajg}{Mirror.xyz: Primitive Finance RMM Explanation} (2021)
+    \item \href{https://not-financial-advice.notion.site/RMMs-c5c6b0d9e190404c94d66241178454da}{RMMs Overview} (Not Financial Advice, 2021)
+    \item \href{https://www.fidelity.com/learning-center/investment-products/options/call-options-basics}{Call Options Basics} (Fidelity Learning Center, 2021)
+    \item \href{https://angeris.github.io/papers/rmms.pdf}{Replicating Market Makers: Theoretical Model} (Angeris et al., 2021)
+    \item \href{https://web.stanford.edu/~boyd/papers/pdf/cfmm.pdf}{Constant Function Market Makers} (Stanford University, Boyd et al., 2021)
+    \item \href{https://not-financial-advice.notion.site/Options-364981cc38bf4c55b45976a715d79604}{Options and Replicating Portfolios} (Not Financial Advice, 2021)
+    \item \href{https://capital.com/replicating-portfolio-definition}{Replicating Portfolio Definition} (Capital.com, 2021)
+\end{enumerate}
 
 \end{document}
+
+

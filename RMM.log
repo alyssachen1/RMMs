@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.11)  25 APR 2024 13:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.11)  6 SEP 2024 14:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -616,41 +616,41 @@ File: constant_sum.png Graphic file (type png)
 <use constant_sum.png>
 Package pdftex.def Info: constant_sum.png  used on input line 57.
 (pdftex.def)             Requested size: 234.8775pt x 224.71051pt.
- [2 <./constant_product.png>] [3 <./constant_sum.png>] [4]
-<Primitive.png, id=105, 707.64375pt x 421.575pt>
+ [2 <./constant_product.png>] [3 <./constant_sum.png>] [4] [5]
+<Primitive.png, id=113, 707.64375pt x 421.575pt>
 File: Primitive.png Graphic file (type png)
 <use Primitive.png>
-Package pdftex.def Info: Primitive.png  used on input line 110.
+Package pdftex.def Info: Primitive.png  used on input line 136.
 (pdftex.def)             Requested size: 375.80544pt x 223.88397pt.
- [5]
-<impermanent_loss.png, id=111, 269.005pt x 322.20375pt>
+ [6]
+<impermanent_loss.png, id=120, 269.005pt x 322.20375pt>
 File: impermanent_loss.png Graphic file (type png)
 <use impermanent_loss.png>
-Package pdftex.def Info: impermanent_loss.png  used on input line 122.
+Package pdftex.def Info: impermanent_loss.png  used on input line 153.
 (pdftex.def)             Requested size: 187.89914pt x 225.05927pt.
- [6{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./Primitive.png>]
-<results.png, id=120, 700.6175pt x 339.2675pt>
+ [7{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./Primitive.png>]
+<results.png, id=130, 700.6175pt x 339.2675pt>
 File: results.png Graphic file (type png)
 <use results.png>
-Package pdftex.def Info: results.png  used on input line 131.
+Package pdftex.def Info: results.png  used on input line 162.
 (pdftex.def)             Requested size: 281.85587pt x 136.48628pt.
- [7 <./impermanent_loss.png> <./results.png>] (./RMM.aux)
+ [8 <./impermanent_loss.png> <./results.png>] [9] (./RMM.aux)
 Package rerunfilecheck Info: File `RMM.out' has not changed.
-(rerunfilecheck)             Checksum: 149B907604D4B95492289B3B780E096B;1998.
+(rerunfilecheck)             Checksum: 684EF9D3372305E77758B5EC7046FD02;2033.
  ) 
 Here is how much of TeX's memory you used:
- 23636 strings out of 476025
- 435417 string characters out of 5790016
- 1859388 words of memory out of 5000000
- 43684 multiletter control sequences out of 15000+600000
+ 23654 strings out of 476025
+ 435545 string characters out of 5790016
+ 1860388 words of memory out of 5000000
+ 43685 multiletter control sequences out of 15000+600000
  522377 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,7n,89p,919b,435s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on RMM.pdf (7 pages, 236844 bytes).
+ 84i,7n,89p,919b,441s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on RMM.pdf (9 pages, 288086 bytes).
 PDF statistics:
- 171 PDF objects out of 1000 (max. 8388607)
- 136 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
+ 238 PDF objects out of 1000 (max. 8388607)
+ 191 compressed objects within 2 object streams
+ 45 named destinations out of 1000 (max. 500000)
  142 words of extra memory for PDF output out of 10000 (max. 10000000)
 
