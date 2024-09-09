@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1725657749 "/Users/alyssachen/Downloads/RMMs/RMM.tex" "RMM.pdf" "RMM" 1725657750 0
-  "/Users/alyssachen/Downloads/RMMs/RMM.tex" 1725657749 18252 da2a90dfa1401ac8ed0d5c416578eb26 ""
+["pdflatex"] 1725913439 "/Users/alyssachen/Downloads/RMMs/RMM.tex" "RMM.pdf" "RMM" 1725913440 0
+  "/Users/alyssachen/Downloads/RMMs/RMM.tex" 1725913437 22518 bffafdd413de50c2c32585cfdec542c0 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -27,6 +27,7 @@
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/rsfs/rsfs7.tfm" 1229303445 692 1b6510779f0f05e9cbf03e0f6c8361e6 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1248133631 36741 fa121aac0049305630cf160b86157ee4 ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb" 1248133631 37166 8ab3487cbe3ab49ebce74c29ea2418db ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1248133631 32362 179c33bbf43f19adbb3825bb4e36e57a ""
@@ -172,12 +173,13 @@
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697080190 7883462 a23569a1db7e7ea53b2e854ce072a0f5 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
   "Primitive.png" 1712816310 116425 03074b765cf22aaf8b204c790a2b10a9 ""
-  "RMM.aux" 1725657750 3659 7f43e411f908de000ed6e88abc7e7587 "pdflatex"
-  "RMM.out" 1725657750 2033 684ef9d3372305e77758b5ec7046fd02 "pdflatex"
-  "RMM.tex" 1725657749 18252 da2a90dfa1401ac8ed0d5c416578eb26 ""
-  "RMM.toc" 1725657750 1068 c3d507c29fc8d21c9385b0df2057f99f "pdflatex"
+  "RMM.aux" 1725913440 4238 ab95e240f1536f66561348c53bc7ecf7 "pdflatex"
+  "RMM.out" 1725913440 2381 89b6fc8a3cc59f159d53ad98276c8ce6 "pdflatex"
+  "RMM.tex" 1725913437 22518 bffafdd413de50c2c32585cfdec542c0 ""
+  "RMM.toc" 1725913440 1239 49569f2c43c5facabf0ea045b98bc14d "pdflatex"
   "constant_product.png" 1712807816 15545 e3d739cc5902109d2108c8d477d4ba9a ""
   "constant_sum.png" 1712807867 12787 7370acdf2ae149fe8ec02420929a9a42 ""
+  "futures_market.png" 1725911453 1210852 fea27bc221ae3bad96ce479cd1c6439c ""
   "impermanent_loss.png" 1712814121 41290 7c1644c79a17171ea3aa3a9912e4ca74 ""
   "results.png" 1712814129 95176 a1c609db464e4b63dfc449bf31344ed4 ""
   (generated)

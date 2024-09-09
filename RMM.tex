@@ -85,8 +85,14 @@ RMMs use algorithms as a mechanism to continuously adjust the composition of the
 
 \subsection{Replicating Portfolios}
 
-A replicating portfolio (also known as a hedge) is defined as a portfolio of assets that exhibit the same properties as the asset being referenced. In this context, there can be state and dynamic replications. State replication alludes to the portfolio sharing the same cash flows as the reference asset with a stagnant change state, while dynamic replication indicates that the portfolio has a differing cash flow than the reference asset,  but shares the same Greeks (meaning for infinitesimally small changes to underlying market parameters, the asset and portfolio price are altered in the same way). Due to the behaviors of the asset and portfolio’s partial derivatives at a singular point, dynamic replication must occur frequently.
+A replicating portfolio (also known as a hedge) is defined as a portfolio of assets that exhibit the same properties as the asset being referenced. In this context, there can be state and dynamic replications. State replication alludes to the portfolio sharing the same cash flows as the reference asset with a stagnant change state, while dynamic replication indicates that the portfolio has a differing cash flow than the reference asset,  but shares the same Greeks (meaning for infinitesimally small changes to underlying market parameters, the asset and portfolio price are altered in the same way). Due to the behaviors of the asset and portfolio’s partial derivatives at a singular point, dynamic replication must occur frequently. 
 
+Replicating portfolios provide a framework for assessing and managing risk-- they do so by allowing traders to replicate the payoff structures of complex financial instruments. This concept also has important implications within DeFi, where derivatives are increasingly used to hedge risk, manage exposure, and facilitate liquidity provision in a permissionless and decentralized manner. 
+\section{Derivatives}
+Why do we use derivatives? The answer is actually quite simple-- derivatives are used as a tool to analyze or speculate on an assets price in the future without having to purchase that asset itself. For example, if a user believed Tesla's stock would rise in the near future, the user is would then purchase the right to buy shares to Tesla's stock in the future for a set price.
+
+A derivative is defined as a financial contract that derives its values from its underlying assets, i.e. shares, securities, commodities, etc. Derivatives that are bought and sold privately (over-the-counter) are not regulated, and derivatives in exchanges are bought and sold via regulated systematic contracts.
+There are three main types of derivatives: futures \& forwards, options, and swaps. This paper will mainly focus on options and futures in the next few sections.
 \subsection{Call Options}
 A call option in traditional financial markets is a contract between a buyer and seller that gives the right to purchase an asset for a predetermined (strike) price up until an expiration date. This allows the buyer to purchase the stock by exercising the call– however, the buyer does not have the obligation to do so. On the other hand, the seller shorting (selling) the call option has the obligation to sell the asset at the strike price. 
 
@@ -98,8 +104,66 @@ Short Calls indicate an open obligation to sell shares. Until the expiration dat
 
 Investors in long call options hope for the underlying stock price to rise above the exercise price, and on the contrary, short call investors want the underlying stock price to stay below the exercise price. 
 
-% \subsection{RMMs vs. AMMs}
+\subsection{Greeks \& Black Scholes}\label{subsec:greeks}
+In DeFi, the concept of Greeks—borrowed from traditional finance (TradFi)—plays a crucial role in analyzing the sensitivity of various derivative instruments and protocols to different market factors. While the Greeks are primarily used in options trading, their interpretation in DeFi can extend to protocols with automated market makers and liquidity provision mechanisms.
 
+\textbf{Delta (\(\Delta\))}: In DeFi, Delta measures the sensitivity of an asset's price to changes in the price of the underlying token. For instance, in an automated market maker (AMM), Delta can represent how the liquidity pool's token ratio shifts in response to price changes of one of the assets in the pool.
+
+\textbf{Gamma (\(\Gamma\))}: Gamma refers to the rate of change of Delta in response to changes in the price of the underlying asset. In DeFi protocols, Gamma may be important for strategies like yield farming or liquidity mining, where changes in the ratio of tokens due to price movements can impact potential returns.
+
+\textbf{Vega (\(V\))}: Vega represents sensitivity to volatility in both TradFi and DeFi. In decentralized options or derivative markets, Vega can quantify how a liquidity provider’s position might gain or lose value based on increased volatility in the price of the underlying assets.
+
+\textbf{Theta (\(\Theta\))}: In DeFi options or time-dependent strategies, Theta measures the sensitivity of the position's value to the passage of time. For example, in protocols that lock liquidity for a set duration, Theta reflects the decay in value as the lock-up period approaches expiration.
+
+\textbf{Rho (\(\rho\))}: Rho measures sensitivity to interest rates. While interest rate sensitivity is more commonly observed in TradFi, DeFi protocols that involve borrowing or lending, such as Aave or Compound, might see Rho influencing the value of liquidity positions due to changes in lending or borrowing rates.
+
+Black Scholes, Black-Scholes-Merton or BSM refers to the differential equation used by traders to price options contracts, and requires five main inputs:
+\begin{enumerate}
+    \item The underlying stock's price
+    \item Option's strike price
+    \item Time to option's expiry
+    \item Stock's volatility
+    \item Risk free interest rate
+\end{enumerate}
+
+Formula:
+\begin{align*}
+    C = SN(d_1) -Ke^{rt}N(d_2),
+\end{align*}
+where $d_1 = \frac{ln_{s}^{k} + (r+ \sigma_{v}^{2})t}{\sigma_s \sqrt{t}}$ and $d_2=d_1-\sigma_s \sqrt{t}$.
+\begin{enumerate}
+    \item $S$-The current or underlying stock's price
+    \item $C$- Call option's price
+    \item $K$- Strike price
+    \item $r$- Risk free interest rate
+    \item $t$- Time to option's maturity
+    \item $N$- Normal distribution
+\end{enumerate}
+\subsection{Forwards \& Futures}
+Imagine you are a baker, famous for your apple pies, but apple prices fluctuate drastically between 10-40 cents/lb depending on the harvest season. In order to hedge against market volatility, you and the apple farmer set up a contract to apples at 15 cents/lb, regardless of the market price. This is an example of a forward contract. 
+
+On the other hand, futures are a legal contract to buy or sell a commodity asset or security at a set price at a specified date in the future. These contracts are standardized on futures exchanges. The seller of the contract has an obligation to deliver that asset at the expiration date, while the buyer takes on the obligation to buy and receive the asset at expiry date.
+
+There are two main forwards and futures curves, which are attributed to prices over time, and is used to determine whether the contract price is rising of falling:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{futures_market.png}
+    \caption{Futures Market (Source: Investopedia)}
+    \label{fig:futures}
+\end{figure}
+
+\begin{enumerate}
+    \renewcommand{\labelenumi}{\alph{enumi}.}
+    
+    \item Contango: \\ 
+    Contango markets are often involving goods that don't have an immediate consumption date, i.e. precious metals. Contango can also be analogous to a normal curve; the idea is that consumers may be more willing to pay a higher price than the current spot price for a commodity in the future. Let's take the previous example of apples: The current spot price for apples are 20 cents/barrel, and the futures contract is priced at 50 cents per barrel. If a consumer buys at the spot price and stores until later to sell at the futures price, the current demand and current price for apples will increase. This implies that, in the future, people will be more likely to agree to sell, which will lower future prices.
+    \item Normal Backwardation \\
+    On the contrary, normal backwardation is based upon the theory that due to volatility, sellers are more inclined to sell at a lower price than the expected price in the future. 
+\end{enumerate}
+
+Backwardation is a indicator of a bullish market for the commodity, since it suggests the current value of the asset is the most valuable, which can be a sign of a shortage. Some severe contangos, on the other hand, can be an indicator of a bearish market, which can be caused by surplus or anticipated future shortage.
+
+% \subsection{RMMs vs. AMMs}
 \section{RMM \& CFMM Curves}
 Since the goal of RMMs, as previously discussed, is to generate a trading function that models a specific trading fee payoff, we can represent the equation for an RMM given the CMM function. A CFMM is governed by its trading function \(\psi \) : \(\mathbb{R}^n_+ \to \mathbb{R}\).
 
@@ -125,16 +189,13 @@ Each reserve \( R_i \in \mathbb{R}^n_+ \) represents the amount of asset \(i\) a
 
     To prove the other direction, since for all \(c \geq 0, c^TR \geq V(c)\), each evaluation of \(c^TV(c)\) would yield a non-negative value. By the same logic, the greatest lower bound of all these values would also be non-negative. Therefore, the condition \(\psi_V\left(R\right) \geq 0\) is true if and only if \(R\) belongs to the set of reserves that yields a payoff greater or equal to \(V\).
 
-    % Circling back to the possibility of generating a trading function \(\psi\) to model a given desired payoff function (V)?
-
-
 \section{Case Study: Primitive}
 Primitive's "RMM-01" is an example of a replicating market maker, built on the idea of a covered call.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{Primitive.png}
-    \caption{Primitive's RMM Curve}
+    \caption{Primitive's RMM Curve (Source: Primitive)}
     \label{fig:primitive}
 \end{figure}
 
@@ -164,23 +225,9 @@ Below, the results account for the total amount of impermanent loss. The value o
     \label{fig:calculations}
 \end{figure}
 
-\subsection{Greeks}\label{subsec:greeks}
-In decentralized finance (DeFi), the concept of Greeks—borrowed from traditional finance (TradFi)—plays a crucial role in analyzing the sensitivity of various derivative instruments and protocols to different market factors. While the Greeks are primarily used in options trading, their interpretation in DeFi can extend to protocols with automated market makers (AMMs) and liquidity provision mechanisms.
-
-\textbf{Delta (\(\Delta\))}: In DeFi, Delta measures the sensitivity of an asset's price to changes in the price of the underlying token. For instance, in an automated market maker (AMM), Delta can represent how the liquidity pool's token ratio shifts in response to price changes of one of the assets in the pool.
-
-\textbf{Gamma (\(\Gamma\))}: Gamma refers to the rate of change of Delta in response to changes in the price of the underlying asset. In DeFi protocols, Gamma may be important for strategies like yield farming or liquidity mining, where changes in the ratio of tokens due to price movements can impact potential returns.
-
-\textbf{Vega (\(V\))}: Vega represents sensitivity to volatility in both TradFi and DeFi. In decentralized options or derivative markets, Vega can quantify how a liquidity provider’s position might gain or lose value based on increased volatility in the price of the underlying assets.
-
-\textbf{Theta (\(\Theta\))}: In DeFi options or time-dependent strategies, Theta measures the sensitivity of the position's value to the passage of time. For example, in protocols that lock liquidity for a set duration, Theta reflects the decay in value as the lock-up period approaches expiration.
-
-\textbf{Rho (\(\rho\))}: Rho measures sensitivity to interest rates. While interest rate sensitivity is more commonly observed in TradFi, DeFi protocols that involve borrowing or lending, such as Aave or Compound, might see Rho influencing the value of liquidity positions due to changes in lending or borrowing rates.
-
-Understanding these Greeks allows DeFi participants to better assess risk and manage strategies in decentralized options markets, liquidity pools, and other financial instruments.
-
 \section*{References}
 \begin{enumerate}
+    \renewcommand{\labelenumi}{[\Alph{enumi}]}
     \item \href{https://medium.com/numoen/an-introduction-to-replicating-market-makers-de5c44d3c558}{An Introduction to Replicating Market Makers} (Numeon, 2021)
     \item \href{https://www.thetie.io/insights/research/rmm/}{Replicating Market Makers} (The Tie, 2021)
     \item \href{https://mirror.xyz/evandekim.eth/aUULTZFwhJ9XsOZ6XIbAYl1iaSncDKpDwKazCemJlI8}{Mirror.xyz: Replicating Market Makers by Evan De Kim} (2021)

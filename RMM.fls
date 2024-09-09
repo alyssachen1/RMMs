@@ -934,6 +934,11 @@ INPUT ./constant_sum.png
 INPUT constant_sum.png
 INPUT ./constant_sum.png
 INPUT ./constant_sum.png
+INPUT ./futures_market.png
+INPUT ./futures_market.png
+INPUT futures_market.png
+INPUT ./futures_market.png
+INPUT ./futures_market.png
 INPUT ./Primitive.png
 INPUT ./Primitive.png
 INPUT Primitive.png
@@ -956,6 +961,7 @@ INPUT ./RMM.out
 INPUT ./RMM.out
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
