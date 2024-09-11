@@ -11,7 +11,7 @@
 \contentsline {subsection}{\numberline {4.2}Greeks \& Black Scholes}{7}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}Forwards \& Futures}{8}{subsection.4.3}%
 \contentsline {section}{\numberline {5}Conclusions: Why RMM's?}{9}{section.5}%
-\contentsline {section}{\numberline {6}Appendix}{10}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Glossary}{10}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}CFMMs vs AMMs}{10}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Impermanent Loss}{10}{subsection.6.3}%
+\contentsline {section}{\numberline {6}Appendix}{11}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Glossary}{11}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}CFMMs vs AMMs}{11}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Impermanent Loss}{11}{subsection.6.3}%

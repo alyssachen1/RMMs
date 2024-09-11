@@ -945,12 +945,12 @@ INPUT ./impermanent_loss.png
 INPUT impermanent_loss.png
 INPUT ./impermanent_loss.png
 INPUT ./impermanent_loss.png
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT ./results.png
 INPUT ./results.png
 INPUT results.png
 INPUT ./results.png
 INPUT ./results.png
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT RMM.aux
 INPUT ./RMM.out
 INPUT ./RMM.out
