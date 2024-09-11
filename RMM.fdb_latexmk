@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1726081062 "/Users/alyssachen/Downloads/RMMs/RMM.tex" "RMM.pdf" "RMM" 1726081064 0
-  "/Users/alyssachen/Downloads/RMMs/RMM.tex" 1726081060 25443 bf6a3d53a1517d65ab81e3560ca628e5 ""
+["pdflatex"] 1726081158 "/Users/alyssachen/Downloads/RMMs/RMM.tex" "RMM.pdf" "RMM" 1726081160 0
+  "/Users/alyssachen/Downloads/RMMs/RMM.tex" 1726081156 25442 1e5ecdf163c7b4dccac6da35e5f59bf6 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -172,10 +172,10 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1697080226 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697080190 7883462 a23569a1db7e7ea53b2e854ce072a0f5 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "RMM.aux" 1726081064 4167 9efd4b11984ca054b586b1724d385049 "pdflatex"
-  "RMM.out" 1726081064 2534 ddeb561d8d40421347f76fb2201dea09 "pdflatex"
-  "RMM.tex" 1726081060 25443 bf6a3d53a1517d65ab81e3560ca628e5 ""
-  "RMM.toc" 1726081064 1331 4285d84ab6a2408205043c430bbd6cdf "pdflatex"
+  "RMM.aux" 1726081160 4273 a6bc876bd2186aa05cac2bdd86cd7b5c "pdflatex"
+  "RMM.out" 1726081160 2618 a137531080094d21659425be8d64d995 "pdflatex"
+  "RMM.tex" 1726081156 25442 1e5ecdf163c7b4dccac6da35e5f59bf6 ""
+  "RMM.toc" 1726081160 1396 0222eeadc1c16213fd9e8df9b3891c17 "pdflatex"
   "constant_product.png" 1712807816 15545 e3d739cc5902109d2108c8d477d4ba9a ""
   "constant_sum.png" 1712807867 12787 7370acdf2ae149fe8ec02420929a9a42 ""
   "futures_market.png" 1725911453 1210852 fea27bc221ae3bad96ce479cd1c6439c ""
