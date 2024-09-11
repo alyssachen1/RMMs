@@ -12,8 +12,6 @@
 \usepackage{parskip}
 \usepackage{hyperref}
 \usepackage{mathrsfs}
-
-
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
@@ -88,11 +86,37 @@ RMMs use algorithms as a mechanism to continuously adjust the composition of the
 A replicating portfolio (also known as a hedge) is defined as a portfolio of assets that exhibit the same properties as the asset being referenced. In this context, there can be state and dynamic replications. State replication alludes to the portfolio sharing the same cash flows as the reference asset with a stagnant change state, while dynamic replication indicates that the portfolio has a differing cash flow than the reference asset,  but shares the same Greeks (meaning for infinitesimally small changes to underlying market parameters, the asset and portfolio price are altered in the same way). Due to the behaviors of the asset and portfolio’s partial derivatives at a singular point, dynamic replication must occur frequently. 
 
 Replicating portfolios provide a framework for assessing and managing risk-- they do so by allowing traders to replicate the payoff structures of complex financial instruments. This concept also has important implications within DeFi, where derivatives are increasingly used to hedge risk, manage exposure, and facilitate liquidity provision in a permissionless and decentralized manner. 
+\subsection{RMM \& CFMM Curves}
+Since the goal of RMMs, as previously discussed, is to generate a trading function that models a specific trading fee payoff, we can represent the equation for an RMM given the CMM function. A constant function market maker (CFMM) is governed by its trading function \(\psi \) : \(\mathbb{R}^n_+ \to \mathbb{R}\).
+
+Each reserve \( R_i \in \mathbb{R}^n_+ \) represents the amount of asset \(i\) available in the contract, which allows individuals to trade reserves as long as the following equation is satisfied: 
+\[ \psi(R') \geq \psi(R), 
+    \] with \(R \in \mathbb{R}^n_+\).
+
+    For a non-decreasing, concave function
+    \[V(\alpha c) = \alpha V(c), \alpha\in\mathbb{R}
+        \]
+    
+    \(V\) is a portfolio value function which maps \(V: \mathbb{R}^n_+ \to \mathbb{R}\). We model asset \(c \in \mathbb{R}^n_+\) as a price vector representing \(n\) coins the CFMM trades, with \(c_i\) being the price of coin \(i\) in the external market. 
+
+    The trading value is then defined with the following equation:
+    \[
+        \psi_V\left(R\right) = \inf_{c\geq0}(c^{\intercal}R - V\left(c\right)).\]
+    
+    Given this definition, it is shown that \(\psi_V\left(R\right)\) is defined as the greatest lower bound (infimum) of the expression \(c^{\intercal}R - V\left(c\right) \) over all non-negative vectors \(c\)
+
+    Now, let's prove that \(\psi_V\left(R\right) \geq 0\) if and only if \(c^{\intercal}R \geq V(c) \forall c \in \mathbb{R}^n\), which is desirable since we want that the least surplus across all non-negative vectors \(c\) to be non-negative to ensure reserves \(R\) are always at least sufficient to meet required values \(V(c)\) under all possible weightings \(c\).
+
+    Given \(\psi_V\left(R\right) \geq 0\), this implies the infimum (least upper bound) of all \(c^{\intercal}R - V\left(c\right)\) across all \(c \geq 0\) is non-negative, which implies that for every non-negative \(c\), the individual value \(c^{\intercal}R - V\left(c\right)\) is also non-negative. Therefore, \(c^TR-V(c) \geq 0 \implies c^TR \geq V(c)\). Since the infimum in this set is proven to be non-negative, this implies all values are at least as great.
+
+    To prove the other direction, since for all \(c \geq 0, c^TR \geq V(c)\), each evaluation of \(c^TV(c)\) would yield a non-negative value. By the same logic, the greatest lower bound of all these values would also be non-negative. Therefore, the condition \(\psi_V\left(R\right) \geq 0\) is true if and only if \(R\) belongs to the set of reserves that yields a payoff greater or equal to \(V\).
+
+
 \section{Derivatives}
 Why do we use derivatives? The answer is actually quite simple-- derivatives are used as a tool to analyze or speculate on an assets price in the future without having to purchase that asset itself. For example, if a user believed Tesla's stock would rise in the near future, the user is would then purchase the right to buy shares to Tesla's stock in the future for a set price.
 
 A derivative is defined as a financial contract that derives its values from its underlying assets, i.e. shares, securities, commodities, etc. Derivatives that are bought and sold privately (over-the-counter) are not regulated, and derivatives in exchanges are bought and sold via regulated systematic contracts.
-There are three main types of derivatives: futures \& forwards, options, and swaps. This paper will mainly focus on options and futures in the next few sections.
+There are three main types of derivatives: futures \& forwards, options, and swaps. This paper will provide an introduction to the aforementioned derivatives.
 \subsection{Call Options}
 A call option in traditional financial markets is a contract between a buyer and seller that gives the right to purchase an asset for a predetermined (strike) price up until an expiration date. This allows the buyer to purchase the stock by exercising the call– however, the buyer does not have the obligation to do so. On the other hand, the seller shorting (selling) the call option has the obligation to sell the asset at the strike price. 
 
@@ -145,6 +169,15 @@ Imagine you are a baker, famous for your apple pies, but apple prices fluctuate 
 On the other hand, futures are a legal contract to buy or sell a commodity asset or security at a set price at a specified date in the future. These contracts are standardized on futures exchanges. The seller of the contract has an obligation to deliver that asset at the expiration date, while the buyer takes on the obligation to buy and receive the asset at expiry date.
 
 There are two main forwards and futures curves, which are attributed to prices over time, and is used to determine whether the contract price is rising of falling:
+\begin{enumerate}
+    \renewcommand{\labelenumi}{\alph{enumi}.}
+    
+    \item \textbf{Contango:} \\ 
+    Contango markets are often involving goods that don't have an immediate consumption date, i.e. precious metals. Contango can also be analogous to a normal curve; the idea is that consumers may be more willing to pay a higher price than the current spot price for a commodity in the future. Let's take the previous example of apples: The current spot price for apples are 20 cents/barrel, and the futures contract is priced at 50 cents per barrel. If a consumer buys at the spot price and stores until later to sell at the futures price, the current demand and current price for apples will increase. This implies that, in the future, people will be more likely to agree to sell, which will lower future prices.
+    \item \textbf{Normal Backwardation} \\
+    On the contrary, normal backwardation is based upon the theory that due to volatility, sellers are more inclined to sell at a lower price than the expected price in the future. 
+\end{enumerate}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{futures_market.png}
@@ -152,43 +185,27 @@ There are two main forwards and futures curves, which are attributed to prices o
     \label{fig:futures}
 \end{figure}
 
-\begin{enumerate}
-    \renewcommand{\labelenumi}{\alph{enumi}.}
-    
-    \item Contango: \\ 
-    Contango markets are often involving goods that don't have an immediate consumption date, i.e. precious metals. Contango can also be analogous to a normal curve; the idea is that consumers may be more willing to pay a higher price than the current spot price for a commodity in the future. Let's take the previous example of apples: The current spot price for apples are 20 cents/barrel, and the futures contract is priced at 50 cents per barrel. If a consumer buys at the spot price and stores until later to sell at the futures price, the current demand and current price for apples will increase. This implies that, in the future, people will be more likely to agree to sell, which will lower future prices.
-    \item Normal Backwardation \\
-    On the contrary, normal backwardation is based upon the theory that due to volatility, sellers are more inclined to sell at a lower price than the expected price in the future. 
-\end{enumerate}
-
 Backwardation is a indicator of a bullish market for the commodity, since it suggests the current value of the asset is the most valuable, which can be a sign of a shortage. Some severe contangos, on the other hand, can be an indicator of a bearish market, which can be caused by surplus or anticipated future shortage.
 
 % \subsection{RMMs vs. AMMs}
-\section{RMM \& CFMM Curves}
-Since the goal of RMMs, as previously discussed, is to generate a trading function that models a specific trading fee payoff, we can represent the equation for an RMM given the CMM function. A CFMM is governed by its trading function \(\psi \) : \(\mathbb{R}^n_+ \to \mathbb{R}\).
+\section{Conclusions: Why RMM's?}
+Suppose you are an investor holding a large position in ETH, looking to hedge against specific short-term downside risks while minimizing exposure to ETH's price movements, yet also wanting to be bullish in the long run. A common strategy would be to actively rebalance your portfolio with options, futures, or other financial instruments to maintain the hedge. This is known as a delta neutral strategy– where the total delta of the portfolio is maintained at or near zero in order to hedge against price movements in the underlying asset.
 
-Each reserve \( R_i \in \mathbb{R}^n_+ \) represents the amount of asset \(i\) available in the contract, which allows individuals to trade reserves as long as the following equation is satisfied: 
-\[ \psi(R') \geq \psi(R), 
-    \] with \(R \in \mathbb{R}^n_+\).
+Instead of doing this manually, users can incorporate RMMs to passively create a delta neutral position. This is one benefit of using RMMs; it serves as a form of risk management without the costs or efforts associated without monitoring the positions daily. Some other reasons to use RMMs could include:
 
-    For a non-decreasing, concave function
-    \[V(\alpha c) = \alpha V(c), \alpha\in\mathbb{R}
-        \]
-    
-    \(V\) is a portfolio value function which maps \(V: \mathbb{R}^n_+ \to \mathbb{R}\). We model asset \(c \in \mathbb{R}^n_+\) as a price vector representing \(n\) coins the CFMM trades, with \(c_i\) being the price of coin \(i\) in the external market. 
+\begin{enumerate}
+    \item \textbf{Creating synthetic exposures} to markets that might not be liquid or even accessible, for example, through cross-chain derivatives.
+    \item \textbf{Custom yield strategies:} By pairing options with yield-bearing assets, you can generate structured yield products such as covered call strategies.
+    \item \textbf{Enhanced liquidity provision:} Liquidity providers (LPs) can set up custom liquidity ranges based on expected volatility in an asset. (i.e. LPs can use concentrated liquidity to replicate option-like payoff profiles by specifying ranges in Uniswap v3).
+\end{enumerate}
 
-    The trading value is then defined with the following equation:
-    \[
-        \psi_V\left(R\right) = \inf_{c\geq0}(c^{\intercal}R - V\left(c\right)).\]
-    
-    Given this definition, it is shown that \(\psi_V\left(R\right)\) is defined as the greatest lower bound (infimum) of the expression \(c^{\intercal}R - V\left(c\right) \) over all non-negative vectors \(c\)
+However, AMMs may also retain its utility in the case where order books become too costly to maintain, such as in a low-liquidity environment. In low-liquidity environments, traditional order book systems can become inefficient due to wide bid-ask spreads and a lack of sufficient market participants to match trades. In contrast, AMMs provide continuous liquidity by relying on algorithmic price setting via a mathematical equation, which ensures trades are able to execute smoothly even in markets with fewer participants or lower liquidity. 
 
-    Now, let's prove that \(\psi_V\left(R\right) \geq 0\) if and only if \(c^{\intercal}R \geq V(c) \forall c \in \mathbb{R}^n\), which is desirable since we want that the least surplus across all non-negative vectors \(c\) to be non-negative to ensure reserves \(R\) are always at least sufficient to meet required values \(V(c)\) under all possible weightings \(c\).
-
-    Given \(\psi_V\left(R\right) \geq 0\), this implies the infimum (least upper bound) of all \(c^{\intercal}R - V\left(c\right)\) across all \(c \geq 0\) is non-negative, which implies that for every non-negative \(c\), the individual value \(c^{\intercal}R - V\left(c\right)\) is also non-negative. Therefore, \(c^TR-V(c) \geq 0 \implies c^TR \geq V(c)\). Since the infimum in this set is proven to be non-negative, this implies all values are at least as great.
-
-    To prove the other direction, since for all \(c \geq 0, c^TR \geq V(c)\), each evaluation of \(c^TV(c)\) would yield a non-negative value. By the same logic, the greatest lower bound of all these values would also be non-negative. Therefore, the condition \(\psi_V\left(R\right) \geq 0\) is true if and only if \(R\) belongs to the set of reserves that yields a payoff greater or equal to \(V\).
-
+Some examples of companies actively working on DeFi RMMs include but are not limited to:
+\begin{enumerate}
+    \item \href{https://www.primitive.xyz/papers/Whitepaper.pdf}{\textbf{Primitive’s RMM-01}}, which replicates the Black Scholes model on the Ethereum mainnet.
+    \item \href{https://github.com/numotrade/whitepaper/blob/main/numoen_whitepaper_v1.pdf}{\textbf{Numeon Core}}, which allows for a permissionless options exchange via Ethereum. 
+\end{enumerate}
 % \section{Case Study: Primitive}
 % Primitive's "RMM-01" is an example of a replicating market maker, built on the idea of a covered call.
 
@@ -206,6 +223,8 @@ Each reserve \( R_i \in \mathbb{R}^n_+ \) represents the amount of asset \(i\) a
 Infimum: The infimum, \(\inf\) of a set is defined to be the greatest lower bound of that set. More rigorously, we define \(\alpha\) to be the \(\inf\) of a set \(A\) if \(\forall x \in A, \alpha \leq x.\)
 Furthermore, since \(\alpha\) is the greatest lower bound, if \(\beta \leq x, \forall x \in A\) and \(\beta \leq \alpha\), since \(\alpha\) serves as the greatest lower bound.
 
+\subsection{CFMMs vs AMMs}\label{subsec:cfmms}
+To differentiate CFMMs and AMMs, remember that all CFMMs are AMMs, but not all AMMs are CFMMs. CFMMs are a specific type of AMM, which is governed by a constant mathematical relationship between asset reserves, while AMMs use any algorithm (i.e. oracles, market conditions) to adjust prices. 
 \subsection{Impermanent Loss}\label{subsec:impermanent}
 \href{https://dailydefi.org/tools/impermanent-loss-calculator/}{Daily Defi} provides an impermanent loss calculator that can be used to visualize the calculations of impermanent loss using Uniswap's constant product formula.
 In the following diagram, Token A is initially set to \$150 and Token B is set to \$1. In Future Prices, Token A has increased to \$300 while Token B has remained the same. (The calculator automatically sets a total starting value of \$1000 between the two tokens)
